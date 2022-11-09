@@ -9,4 +9,3 @@ function* generator() {
 }
 
 const gen = generator();
-gen.next().value;
