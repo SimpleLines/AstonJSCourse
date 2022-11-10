@@ -1,7 +1,13 @@
-function deepCopyObject(obj) {
-  const newObject = {};
-  for (const key in obj) {
-    newObject[key] = obj[key];
+const deepCopyObject3 = (input) => {
+  if (typeof input !== 'object') {
+    return input;
   }
-  return newObject;
-}
+  let copy = Array.isArray(input) ? [] : {};
+
+  for (const key in input) {
+    const value = input[key];
+    copy[key] = deepCopyObject3(value);
+  }
+
+  return copy;
+};

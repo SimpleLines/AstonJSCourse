@@ -1,20 +1,26 @@
 function getInterval(arr, from, to) {
-  const arrIsValid = arr.every((el) => isFinite(el));
-  const fromIsValid = isFinite(from);
-  const toIsValid = isFinite(to);
+  const arrIsValid = arr.every(
+    (el) => typeof el === 'number' && !Number.isNaN(el)
+  );
+  const fromIsValid =
+    typeof from === 'number' && !Number.isNaN(from) && Number.isFinite(from);
+  const toIsValid =
+    typeof to === 'number' && !Number.isNaN(to) && Number.isFinite(to);
 
   if (arrIsValid && fromIsValid && toIsValid) {
-    const minMax = new Array(from, to);
-    const min = Math.min(...minMax);
-    const max = Math.max(...minMax);
+    const min = from < to ? from : to;
+    const max = from > to ? from : to;
     return arr.filter((el) => el >= min && el <= max);
-  } else if (!arrIsValid) {
+  }
+  if (!arrIsValid) {
     throw `"В функцию getInterval были переданы невалидные параметры. Параметр arr
 должен содержать только числовые значения"`;
-  } else if (!fromIsValid) {
+  }
+  if (!fromIsValid) {
     throw `"В функцию getInterval были переданы невалидные параметры. Параметр from
 должен быть числом"`;
-  } else {
+  }
+  {
     throw `"В функцию getInterval были переданы невалидные параметры. Параметр to
 должен быть числом"`;
   }
