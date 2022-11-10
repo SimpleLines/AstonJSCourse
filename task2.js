@@ -1,9 +1,16 @@
 const getInterval = (arr, from, to) => {
 	argValidate(arr, from, to);
-	if (from > to) {
-		return arr.slice(to - 1, from);
+	let startInterval;
+	let endInterval;
+	startInterval = from < to ? from : to;
+	endInterval = from < to ? to : from;
+	let sortedArr = [];
+	for (let key = startInterval; key < endInterval + 1; key++) {
+		if (arr.includes(key)) {
+			sortedArr.push(key);
+		}
 	}
-	return arr.slice(from - 1, to);
+	return sortedArr;
 };
 
 const argValidate = (arr, from, to) => {
@@ -13,16 +20,14 @@ const argValidate = (arr, from, to) => {
 		toError: 'Параметр to должен быть числом',
 	};
 	for (const value of arr) {
-		if (typeof value !== 'number') {
+		if (typeof value !== 'number' || Number.isNaN(+value)) {
 			throw new Error(errorMessage.arrError);
 		}
 	}
-	if (typeof from !== 'number') {
+	if (typeof from !== 'number' || Number.isNaN(+from)) {
 		throw new Error(errorMessage.fromError);
 	}
-	if (typeof to !== 'number') {
+	if (typeof to !== 'number' || Number.isNaN(+to)) {
 		throw new Error(errorMessage.toError);
 	}
 };
-
-console.log(getInterval([1, 10, 11, 3, 837, 32, 77, 90], 7, 3));

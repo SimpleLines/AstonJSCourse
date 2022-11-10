@@ -10,4 +10,3 @@ function* getFibonacci() {
 }
 
 const fib = getFibonacci();
-console.log(fib.next().value);
