@@ -1,4 +1,4 @@
-const deepCopyObject3 = (input) => {
+const deepCopyObject = (input) => {
   if (typeof input !== 'object') {
     return input;
   }
@@ -6,7 +6,7 @@ const deepCopyObject3 = (input) => {
 
   for (const key in input) {
     const value = input[key];
-    copy[key] = deepCopyObject3(value);
+    copy[key] = deepCopyObject(value);
   }
 
   return copy;
