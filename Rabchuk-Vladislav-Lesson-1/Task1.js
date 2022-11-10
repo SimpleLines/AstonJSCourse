@@ -1,3 +1,1 @@
-function sum(a, b) {
-  return (+a + +b).toFixed(3);
-}
+const sum = (a, b) => Math.round((+a + +b) * 1000) / 1000;
