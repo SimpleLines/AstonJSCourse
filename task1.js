@@ -1,11 +1,13 @@
 function deepCopyObject(obj) {
-  const cloneObject = {};
-  for (const i in obj) {
-    if (obj[i] instanceof Object) {
-      cloneObject[i] = deepCopyObject(obj[i]);
-      continue;
-    }
-    cloneObject[i] = obj[i];
+  if (typeof obj !== 'object' || obj === null) {
+    return obj;
   }
+
+  let cloneObject = Array.isArray(obj) ? [] : {};
+
+  for (const i in obj) {
+    cloneObject[i] = deepCopyObject(obj[i]);
+  }
+
   return cloneObject;
 }
