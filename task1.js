@@ -1,4 +1,1 @@
-function sum(a, b) {
-  let result = +a + +b;
-  return +result.toFixed(3);
-}
+const sum = (a, b) => +(+a + +b).toFixed(3);
