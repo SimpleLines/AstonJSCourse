@@ -22,4 +22,4 @@ function getInterval(arr, from, to) {
     return arr.slice(from, to);
   }
 }
-(getInterval(arr, from, to));
+getInterval(arr, from, to);
