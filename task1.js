@@ -1,4 +1,4 @@
 function sum(a, b) {
-  let res = Number(a) + Number(b);
+  let res = +a + +b;
   return +res.toFixed(3);
 }
