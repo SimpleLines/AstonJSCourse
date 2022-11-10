@@ -1,10 +1,14 @@
 const getNumberRadix = (value, radix) => {
-	const num = parseInt(value);
-	const radixToNum = parseInt(radix);
-	if (radix > 16 || radix < 2 || !radixToNum || !num) {
+	const regexp = /^\d+$/gi;
+	if (
+		!regexp.test(value) ||
+		typeof radix !== 'number' ||
+		radix > 16 ||
+		radix < 2
+	) {
 		throw new Error(
 			'Функция getNumberRadix была вызвана с некорректными параметрами'
 		);
-	}
-	return num.toString(radix);
+	} 
+	return value.toString(radix);
 };
