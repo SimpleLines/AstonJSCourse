@@ -1,5 +1,8 @@
 Array.prototype.filterArray = function (callback, thisArg) {
-  if (typeof callback !== 'function') throw new Error('Callback is not a function');
+  if (typeof callback !== 'function') {
+    throw new Error('Callback is not a function');
+  }
+  
   let context = thisArg ?? this;
 
   let res = [];
@@ -10,7 +13,7 @@ Array.prototype.filterArray = function (callback, thisArg) {
     }
 
     let current = callback.call(context, this[i], i, this);
-    
+
     if (current) {
       res.push(this[i]);
     }
