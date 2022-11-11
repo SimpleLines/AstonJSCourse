@@ -11,6 +11,9 @@ function filterArray(cb, thisArg) {
     context = thisArg;
   }
 
+  if (typeof cb !== 'function') {
+    throw new Error('Callback must be a function');
+  }
   for (let i = 0; i < obj.length; i++) {
     if (i in obj) {
       if (cb.call(context, this[i], i, obj)) {
