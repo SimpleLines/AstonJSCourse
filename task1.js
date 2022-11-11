@@ -5,8 +5,5 @@ Array.prototype.filterArray = function (cb) {
       result.push(this[i]);
     }
   }
-
   return result;
 };
-
-1;

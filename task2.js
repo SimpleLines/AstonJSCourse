@@ -24,5 +24,3 @@ function createPerson(name, skills) {
     },
   };
 }
-
-1;
