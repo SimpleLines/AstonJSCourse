@@ -100,9 +100,6 @@ class Staff {
   }
 }
 
-const helen = new Staff('Helen', 'Dean');
-console.log(helen.info);
-
 class Developer extends Staff {
   constructor() {
     super('Unknown Name', 'Unknown Surname', 1200, 'developer');
@@ -140,5 +137,3 @@ class Developer extends Staff {
     };
   }
 }
-const mike = new Developer('Mike', 'Shitboogers');
-console.log(mike.info);
