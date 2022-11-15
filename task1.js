@@ -14,10 +14,10 @@ class Staff {
   ) {
     this.name = name;
     this.surname = surname;
-    this.#wage = +wage;
+    this.#wage = wage;
     this.#specialty = specialty;
-    this.#workDays = +workDays;
-    this.#experience = +experience;
+    this.#workDays = workDays;
+    this.#experience = experience;
   }
 
   checkString(str) {
@@ -101,8 +101,8 @@ class Staff {
 }
 
 class Developer extends Staff {
-  constructor() {
-    super('Unknown Name', 'Unknown Surname', 1200, 'developer');
+  constructor(name, surname, wage, specialty, workDays, experience) {
+    super(name, surname, 1200, 'developer');
   }
 
   get info() {
