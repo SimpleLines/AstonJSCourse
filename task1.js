@@ -34,7 +34,6 @@ class LinkedList {
   addAt(value, index) {
     const i = Number.parseInt(index);
     this.checkIndex(i);
-
     if (i === 0) {
       this.addFirst(value);
       return;
@@ -44,7 +43,6 @@ class LinkedList {
     let currentNode, previousNode;
     currentNode = this.head;
     let count = 0;
-
     while (count < i) {
       previousNode = currentNode;
       currentNode = currentNode.next;
@@ -61,7 +59,6 @@ class LinkedList {
 
     let currentNode = this.head;
     let count = 0;
-
     while (currentNode) {
       if (count === i) {
         return currentNode;
@@ -73,7 +70,6 @@ class LinkedList {
 
   getByValue(value) {
     let currentNode = this.head;
-
     while (currentNode) {
       if (
         currentNode.value.toString().toLowerCase().includes(value) &&
