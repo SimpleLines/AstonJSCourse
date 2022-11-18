@@ -50,11 +50,13 @@ class LinkedList {
     if (this.head === this.tail) {
       this.head = null;
       this.tail = null;
+      return this;
     }
     let node = this.head;
     while (node.next) {
       !node.next.next ? (node.next = null) : (node = node.next);
     }
     this.tail = node;
+    return this;
   }
 }
