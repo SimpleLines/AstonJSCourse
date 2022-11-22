@@ -1,0 +1,135 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  background: #eee;
+  color: #333;
+  height: 100vh;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 5px;
+  margin-bottom: 10px;
+
+  background: white;
+  box-shadow: 0 0 10px #2e2e2e6c;
+}
+
+h1 {
+  color: #610000;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+footer {
+  background-image: linear-gradient(#444, #333 90%);
+  box-shadow: 0 0 5px black;
+
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+  padding: 10px;
+
+  color: #eee;
+  font-size: 14px;
+  text-align: right;
+}
+
+footer p {
+  color: #b0b0b0;
+}
+
+.listUsers {
+  display: grid;
+  grid-template-columns: 1fr 10fr 20fr;
+
+  margin-bottom: 30px;
+
+  overflow: hidden;
+  box-shadow: 0 0 10px 0 #00000020;
+}
+
+main .listUsers {
+  width: 100%;
+  max-width: 768px;
+  border: 1px solid #a6a6a6;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+main .listUsers .item {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.item:last-of-type {
+  border-bottom: none;
+}
+
+.item {
+  background: white;
+  display: flex;
+  align-items: center;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+#pagination button {
+  width: 50px;
+  height: 50px;
+
+  appearance: none;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+
+  background: #610000;
+
+  margin: 10px 3px;
+  transition: all 0.2s;
+
+  color: white;
+  font-size: 18px;
+  text-shadow: 0 0 4px black;
+  box-shadow: 0 0 4px #7d7d7d;
+}
+
+#pagination button:hover {
+  background: #9d0000;
+  transform: scale(1.1);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 4px #7d7d7d;
+}
+
+#pagination button:active {
+  transform: translateY(0px);
+  box-shadow: 0 0px 4px #7d7d7d;
+}
+
+#pagination button.active {
+  transform: translateY(-4px);
+  background: #d60000;
+  box-shadow: 0 6px 4px #7d7d7d;
+}
