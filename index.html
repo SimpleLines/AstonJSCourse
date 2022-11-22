@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      section {
+        margin: 100px auto;
+        max-width: 800px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .btns {
+        display: flex;
+        gap: 20px;
+        position: fixed;
+        bottom: 300px;
+        user-select: none;
+      }
+
+      .btns a {
+        padding: 10px;
+        border: 1px solid;
+        text-decoration: none;
+        transition: all 0.2s;
+        cursor: pointer;
+      }
+
+      .btns a:hover {
+        transform: translateY(-3px);
+      }
+      .list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <ul class="list"></ul>
+      <div class="btns"></div>
+    </section>
+    <script src="./main.js"></script>
+  </body>
+</html>
