@@ -2,11 +2,21 @@
 
 const listElement = document.getElementById('list');
 const headElement = document.getElementById('head');
-
 const paginationElement = document.getElementById('pagination');
-
+const date = document.querySelector('.date');
+const now = new Date();
+const locale = navigator.language;
+const options = {
+  hour: 'numeric',
+  minute: 'numeric',
+  day: 'numeric',
+  month: 'long',
+  weekday: 'long',
+};
+const rows = 10;
 let currentPage = 1;
-let rows = 5;
+
+date.textContent = new Intl.DateTimeFormat(locale, options).format(now);
 
 function DisplayList(items, wrapper, rows_per_page, page) {
   wrapper.innerHTML = '';
@@ -21,6 +31,7 @@ function DisplayList(items, wrapper, rows_per_page, page) {
 
     let idElement = document.createElement('div');
     idElement.classList.add('item');
+    idElement.classList.add('bold');
     idElement.innerText = item.id;
     wrapper.appendChild(idElement);
 
