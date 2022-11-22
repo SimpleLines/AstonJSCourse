@@ -1,0 +1,46 @@
+.wrapper {
+    padding-bottom: 30px;
+}
+
+.container {
+    max-width: 1140px;
+}
+
+nav {
+    margin-bottom: 25px;
+}
+.nav-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+.card {
+    position: relative;
+    max-width: 250px;
+}
+
+.paginationUl {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.paginationLi {
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.active {
+    color: red;
+    font-weight: 700;
+}
