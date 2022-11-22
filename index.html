@@ -8,8 +8,16 @@
   </head>
   <body>
     <div class="container">
-      <div class="posts"></div>
-      <div class="pagination"></div>
+      <ul class="paginated-list"></ul>
+      <div class="pagination-container">
+        <button class="pagination-button" id="prev-button" aria-label="Previous page" title="Previous page">
+          &lt;
+        </button>
+        <div class="pagination-numbers"></div>
+        <button class="pagination-button" id="next-button" aria-label="Next page" title="Next page">
+          &gt;
+        </button>
+      </div>
     </div>
 
     <script src="script.js"></script>

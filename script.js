@@ -1,73 +1,112 @@
-  const getPosts = async (url) => {
-    const response = await fetch(url);
-    const headers = new Map(response.headers);
-    const data = await response.json();
-    return {
-        data,
-        total: headers.get('x-total-count') || null
-    };
+const getPosts = async (url) => {
+  const response = await fetch(url);
+  const headers = new Map(response.headers);
+  const data = await response.json();
+  return {
+    data,
+    total: headers.get('x-total-count') || null
+  };
 };
 
-let _limit = 10;
-let _page = 1;
+let limit = 10;
+let page = 1;
 
-getPosts(`https://jsonplaceholder.typicode.com/posts?${_limit}&${_page}`)
-    .then((result) => {
-      const {data} = result;
-          
-      function displayList(arrData, limitPerPage, page) {
-        const postsElements = document.querySelector('.posts');
-        postsElements.innerHTML = "";
-        page--;
-    
-        const start = limitPerPage * page;
-        const end = start + limitPerPage;
-        const paginatedData = arrData.slice(start, end);
-    
-        paginatedData.forEach((elem) => {
-          const postElement = document.createElement('div');
-          postElement.classList.add('post');
-          postElement.innerHTML = `<span class="post-title">${elem.title}</span>
-                                    <br>
-                                    <span class="post-body">${elem.body}</span>`;
-          postsElements.appendChild(postElement);
-        })
-      }
-    
-      function displayPagination(arrData, limitPerPage) {
-        const paginationElement = document.querySelector('.pagination');
-        const pagesCount = Math.ceil(arrData.length / limitPerPage);
-        const ulElement = document.createElement('ul');
-        ulElement.classList.add('pagination__list');
-    
-        for (let i = 0; i < pagesCount; i++) {
-          const liEl = displayPaginationBtn(i + 1);
-          ulElement.appendChild(liEl);
+getPosts(`https://jsonplaceholder.typicode.com/posts?_${limit}&_${page}`)
+  .then((result) => {
+    const {data} = result;
+    const postsElements = document.querySelector('.paginated-list');
+
+    function displayList(arrData) {
+      const paginatedData = arrData;
+      paginatedData.forEach((elem) => {
+        const postElement = document.createElement('li');
+        postElement.innerHTML = ` <a href="https://jsonplaceholder.typicode.com/posts/${elem.id}">
+                                    <div class="post-element">
+                                      <span class="post-element__title">${elem.title}</span>
+                                      <br>
+                                      <span class="post-element__body">${elem.body}</span>
+                                    </div>
+                                  </a>
+                                `;
+        postsElements.appendChild(postElement);
+      })
+    }
+    displayList(data);
+
+    let li = document.querySelectorAll('li');
+    let paginationNumber = document.querySelector('.pagination-numbers');
+    let buttonCount = Math.ceil(li.length / limit);
+
+    for (let i = 1; i <= buttonCount; i++) {
+      let button = document.createElement('button');
+      button.innerHTML = i;
+      paginationNumber.appendChild(button);
+    }
+
+    document.getElementById('next-button').addEventListener('click', next);
+    document.getElementById('prev-button').addEventListener('click', prev);
+    document.getElementById('prev-button').setAttribute('disabled', true);
+
+    function main(pageNum) {
+      let nextPage = limit * pageNum;
+      let prevPage = limit * (pageNum - 1);
+      for (let i = 0; i < li.length; i++) {
+        li[i].style.display = 'none';
+        if (i < nextPage && i >= prevPage) {
+          li[i].style.display = 'block';
         }
-        paginationElement.appendChild(ulElement);
       }
-    
-      function displayPaginationBtn(page) {
-        const liElement = document.createElement('li');
-        liElement.classList.add('pagination__item');
-        liElement.innerText = page;
-    
-        if (_page == page) liElement.classList.add('pagination__item--active');
-    
-        liElement.addEventListener('click', () => {
-          _page = page;
-          displayList(data, _limit, _page);
-    
-          let currentItemLi = document.querySelector('li.pagination__item--active');
-          currentItemLi.classList.remove('pagination__item--active');
-    
-          liElement.classList.add('pagination__item--active');
-        })
-    
-        return liElement;
-      }
+    }
+    main(page);
 
-      displayList(data, _limit, _page);
-      displayPagination(data, _limit);
-    }); 
- 
+    let buttnNumbers = paginationNumber.querySelectorAll('button');
+    for (let i = 0; i < buttnNumbers.length; i++) {
+      buttnNumbers[i].addEventListener('click', buttonClick);
+    }
+    buttnNumbers[page - 1].classList.add('active');
+
+    function buttonClick() {
+      buttnNumbers[page - 1].classList.remove('active');
+      if (this.innerHTML == buttonCount) {
+        document.getElementById('next-button').setAttribute('disabled', true);
+        document.getElementById('prev-button').removeAttribute('disabled');
+      }
+      else if (this.innerHTML == 1) {
+        document.getElementById('prev-button').setAttribute('disabled', true);
+        document.getElementById('next-button').removeAttribute('disabled');
+      }
+      else {
+        document.getElementById('next-button').removeAttribute('disabled');
+        document.getElementById('prev-button').removeAttribute('disabled');
+      }
+      page = this.innerHTML;
+      main(page);
+      this.classList.add('active');
+    }
+
+    function next() {
+      document.getElementById('prev-button').removeAttribute('disabled');
+      if (page !== buttonCount) {
+        buttnNumbers[page - 1].classList.remove('active');
+        buttnNumbers[page].classList.add('active');
+        page++;
+      }
+      if (page === buttonCount) {
+        document.getElementById('next-button').setAttribute('disabled', true);
+      }
+      main(page);
+    }
+
+    function prev() {
+      buttnNumbers[page - 1].classList.remove('active');
+      buttnNumbers[page - 2].classList.add('active');
+      document.getElementById('next-button').removeAttribute('disabled');
+      if (page !== 1) {
+        page--;
+      }
+      if (page === 1) {
+        document.getElementById('prev-button').setAttribute('disabled', true);
+      }
+      main(page);
+    }
+}); 
