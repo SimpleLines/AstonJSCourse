@@ -10,7 +10,6 @@ const lapDiv = document.querySelector('.lap');
 const laps = document.querySelector('.laps');
 
 const date = document.querySelector('.date');
-const now = new Date();
 const locale = navigator.language;
 const options = {
   hour: 'numeric',
@@ -33,16 +32,33 @@ stopBtn.addEventListener('click', stop);
 resetBtn.addEventListener('click', reset);
 lapBtn.addEventListener('click', lap);
 
-date.textContent = new Intl.DateTimeFormat(locale, options).format(now);
+currentUserTime();
+setInterval(currentUserTime, 30000);
+function currentUserTime() {
+  const now = new Date();
+  date.textContent = new Intl.DateTimeFormat(locale, options).format(now);
+}
+
+if (localStorage.getItem('time')) {
+  time.innerText = localStorage.getItem('time');
+  seconds = localStorage.getItem('seconds');
+  start();
+}
 
 function timer() {
-  seconds++;
+  if (lapTime.innerText === '00:00:00') {
+    lapTimer();
+  }
 
+  seconds++;
   let hours = Math.floor(seconds / 3600);
   let mins = Math.floor((seconds - hours * 3600) / 60);
   let secs = seconds % 60;
 
   time.innerText = `${addZero(hours)}:${addZero(mins)}:${addZero(secs)}`;
+
+  localStorage.setItem('time', time.innerText);
+  localStorage.setItem('seconds', seconds);
 }
 
 function lapTimer() {
@@ -85,6 +101,7 @@ function stop() {
 }
 
 function reset() {
+  localStorage.clear();
   stop();
   seconds = 0;
   time.innerText = '00:00:00';
@@ -115,4 +132,17 @@ function lap() {
 
   lapCount++;
   laps.prepend(lapElement);
+
+  lapContainerAddAnim();
+  animLap();
+}
+
+function animLap() {
+  const appear = [{ opacity: '0' }, { opacity: '1' }];
+  const appearTiming = {
+    duration: 1000,
+    iterations: 1,
+  };
+  const lapAppear = document.querySelector('.lap');
+  lapAppear.animate(appear, appearTiming);
 }
