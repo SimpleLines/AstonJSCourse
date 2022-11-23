@@ -2,7 +2,7 @@ const LIMIT = 10;
 const list = document.querySelector('.list');
 const btns = document.querySelector('.btns');
 let page = 1;
-let currentPage = 1;
+let currentPage;
 
 const getPosts = async (url) => {
   const response = await fetch(url);
@@ -14,16 +14,21 @@ const getPosts = async (url) => {
   };
 };
 
+const createList = (arr) => {
+  list.innerHTML = '';
+  for (let val of arr) {
+    let li = document.createElement('li');
+    li.innerHTML = JSON.stringify(val);
+    list.appendChild(li);
+  }
+};
+
 getPosts(`https://jsonplaceholder.typicode.com/posts?_limit=${LIMIT}&_page=${page}`)
   .then((result) => {
     let totalPages = Math.ceil(+result.total / LIMIT);
     currentPage = 1;
-    for (let val of result.data) {
-      let li = document.createElement('li');
-      li.innerHTML = JSON.stringify(val);
-      list.appendChild(li);
-    }
 
+    createList(result.data);
     return totalPages;
   })
   .then((totalPages) => {
@@ -38,12 +43,7 @@ getPosts(`https://jsonplaceholder.typicode.com/posts?_limit=${LIMIT}&_page=${pag
         getPosts(
           `https://jsonplaceholder.typicode.com/posts?_limit=${LIMIT}&_page=${currentPage - 1}`,
         ).then((result) => {
-          list.innerHTML = '';
-          for (let val of result.data) {
-            let li = document.createElement('li');
-            li.innerHTML = JSON.stringify(val);
-            list.appendChild(li);
-          }
+          createList(result.data);
         });
         currentPage--;
       }
@@ -55,12 +55,7 @@ getPosts(`https://jsonplaceholder.typicode.com/posts?_limit=${LIMIT}&_page=${pag
         getPosts(
           `https://jsonplaceholder.typicode.com/posts?_limit=${LIMIT}&_page=${currentPage + 1}`,
         ).then((result) => {
-          list.innerHTML = '';
-          for (let val of result.data) {
-            let li = document.createElement('li');
-            li.innerHTML = JSON.stringify(val);
-            list.appendChild(li);
-          }
+          createList(result.data);
         });
         currentPage++;
       }
@@ -77,12 +72,7 @@ getPosts(`https://jsonplaceholder.typicode.com/posts?_limit=${LIMIT}&_page=${pag
         if (+this.innerHTML !== currentPage) {
           getPosts(`https://jsonplaceholder.typicode.com/posts?_limit=${LIMIT}&_page=${i}`).then(
             (result) => {
-              list.innerHTML = '';
-              for (let val of result.data) {
-                let li = document.createElement('li');
-                li.innerHTML = JSON.stringify(val);
-                list.appendChild(li);
-              }
+              createList(result.data);
             },
           );
           currentPage = +this.innerHTML;
@@ -98,3 +88,4 @@ getPosts(`https://jsonplaceholder.typicode.com/posts?_limit=${LIMIT}&_page=${pag
 
     btns.append(next);
   });
+
