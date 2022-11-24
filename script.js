@@ -107,7 +107,7 @@ function reset() {
   time.innerText = '00:00:00';
   lapTime.innerText = '00:00:00';
   laps.innerText = '';
-  lapCount = 0;
+  lapCount = 1;
   laps.style.opacity = '0';
   lapTime.style.opacity = '0';
 }
@@ -116,6 +116,7 @@ function lap() {
   if (!interval) {
     return;
   }
+
   lapSeconds = 0;
   startLap();
 
@@ -133,7 +134,6 @@ function lap() {
   lapCount++;
   laps.prepend(lapElement);
 
-  lapContainerAddAnim();
   animLap();
 }
 
