@@ -1,0 +1,28 @@
+header {
+    margin: auto;
+    text-align: center;
+    width: 100%;
+}
+.container {
+    position: relative;
+    margin: auto;
+    display: flex;
+    gap: 20px;
+    width: 70%;
+    height: 100%;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 5%;
+}
+.image-from-json {
+    width: 150px;
+    height: 150px;
+}
+footer {
+    position: fixed;
+    bottom: 15%;
+}
+.number_limited{
+text-align:  center;
+}
