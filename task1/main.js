@@ -1,28 +1,33 @@
 const entriesPage = 10;
-const entriesGroup = "todos";
-const wrap = document.getElementById("wrapper");
-const buttonNext = document.querySelector(".button__next");
-const buttonBack = document.querySelector(".button__back");
+const entriesGroup = 'todos';
+const wrap = document.getElementById('wrapper');
+const buttonNext = document.querySelector('.button__next');
+const buttonBack = document.querySelector('.button__back');
 let activePage = 1;
 
-buttonNext.addEventListener("click", () => {
+buttonNext.addEventListener('click', () => {
   activePage++;
-  onClickPageActive(activePage);
 
   getPosts(
     `https://jsonplaceholder.typicode.com/${entriesGroup}?_limit=${entriesPage}&_page=${activePage}`
   ).then((result) => {
-    console.log(result.data);
+    if (result.total / entriesPage < activePage) {
+      activePage--;
+    } else {
+      console.log(result.data);
+      onClickPageActive(activePage);
+    }
   });
 });
 
-buttonBack.addEventListener("click", () => {
+buttonBack.addEventListener('click', () => {
   activePage == 1 ? activePage : activePage--;
   onClickPageActive(activePage);
 
   getPosts(
     `https://jsonplaceholder.typicode.com/${entriesGroup}?_limit=${entriesPage}&_page=${activePage}`
   ).then((result) => {
+    //написать как и на кнопке некст
     console.log(result.data);
   });
 });
@@ -34,7 +39,7 @@ const getPosts = async (url) => {
     const data = await response.json();
     return {
       data,
-      total: headers.get("x-total-count") || null,
+      total: headers.get('x-total-count') || null,
     };
   } catch (error) {
     errorConnection();
@@ -42,8 +47,8 @@ const getPosts = async (url) => {
 };
 
 const errorConnection = () => {
-  const error = document.createElement("p");
-  error.textContent = "Сервер недоступен 😔";
+  const error = document.createElement('p');
+  error.textContent = 'Сервер недоступен 😔';
   wrap.append(error);
 };
 
@@ -52,13 +57,13 @@ const createPagination = (result) => {
     const pagesAmount = result.total / 10;
 
     for (let i = 1; i <= pagesAmount; i++) {
-      const numPage = document.createElement("button");
-      if (i === 1) numPage.classList.add("page_active");
-      numPage.classList.add("button__pagination");
+      const numPage = document.createElement('button');
+      if (i === 1) numPage.classList.add('page_active');
+      numPage.classList.add('button__pagination');
       numPage.textContent = i;
       wrap.append(numPage);
 
-      numPage.addEventListener("click", () => {
+      numPage.addEventListener('click', () => {
         getPosts(
           `https://jsonplaceholder.typicode.com/${entriesGroup}?_limit=${entriesPage}&_page=${numPage.textContent}`
         ).then((result) => {
@@ -69,19 +74,19 @@ const createPagination = (result) => {
       });
     }
   } else {
-    const notEntries = document.createElement("p");
-    notEntries.textContent = "Записи не найдены 😔";
+    const notEntries = document.createElement('p');
+    notEntries.textContent = 'Записи не найдены 😔';
     wrap.append(notEntries);
   }
 };
 
 const onClickPageActive = (numPage) => {
   console.log(numPage);
-  const pages = document.querySelectorAll(".button__pagination");
+  const pages = document.querySelectorAll('.button__pagination');
   for (let page of pages) {
     numPage == page.textContent
-      ? page.classList.add("page_active")
-      : page.classList.remove("page_active"); //исправить активную страницу
+      ? page.classList.add('page_active')
+      : page.classList.remove('page_active'); //исправить активную страницу
   }
 };
 
