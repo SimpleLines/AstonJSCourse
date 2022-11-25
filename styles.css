@@ -108,7 +108,7 @@ h1 span {
   align-items: center;
   gap: 10px;
   margin-bottom: 50px;
-  padding-top: 15px;
+  padding: 25px;
 
   font-size: 30px;
   letter-spacing: 18px;
@@ -133,10 +133,6 @@ h1 span {
 
 .lap:first-of-type {
   border-top: none;
-}
-
-.lap:last-of-type {
-  margin-bottom: 12px;
 }
 
 .icon {

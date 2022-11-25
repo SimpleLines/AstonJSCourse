@@ -62,12 +62,12 @@ function timer() {
 }
 
 function lapTimer() {
-  lapSeconds++;
   let hours = Math.floor(lapSeconds / 3600);
   let mins = Math.floor((lapSeconds - hours * 3600) / 60);
   let secs = lapSeconds % 60;
 
   lapTime.innerText = `${addZero(hours)}:${addZero(mins)}:${addZero(secs)}`;
+  lapSeconds++;
 }
 
 function addZero(time) {
@@ -80,9 +80,7 @@ function start() {
   }
   time.style.color = '#4a413d';
   interval = setInterval(timer, 1000);
-  if (!(lapTime.innerText === '00:00:00')) {
-    startLap();
-  }
+  startLap();
 }
 
 function startLap() {
@@ -108,6 +106,7 @@ function reset() {
   lapTime.innerText = '00:00:00';
   laps.innerText = '';
   lapCount = 1;
+  lapSeconds = 0;
   laps.style.opacity = '0';
   lapTime.style.opacity = '0';
 }
