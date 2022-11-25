@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stopwatch</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="main.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="wrapper__time">
+        <span id="hour" class="time__hour">00</span>: <span id="min" class="time__min">00</span>:
+        <span id="sec" class="time__sec">00</span>.
+        <span id="millisec" class="time__millisec">0</span>
+      </div>
+      <div class="wrapper__buttons">
+        <button id="start" class="button__start">Старт</button>
+        <button id="reset" class="button__reset">Сброс</button>
+        <button id="circle" class="button__circle" disabled>Круг</button>
+      </div>
+      <ol id="wrapper__circle" class="wrapper__circle"></ol>
+    </div>
+  </body>
+</html>
