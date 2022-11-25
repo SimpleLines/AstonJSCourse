@@ -11,10 +11,17 @@
   <body>
     <div class="wrapper">
       <div class="wrapper__time">
-        <span id="hour" class="hour">00</span>: <span id="min" class="min">00</span>:
-        <span id="sec" class="sec">00</span>.
-        <span id="millisec" class="millisec">0</span>
+        <span id="hour" class="time__hour">00</span>:
+        <span id="min" class="time__min">00</span>:
+        <span id="sec" class="time__sec">00</span>.
+        <span id="millisec" class="time__millisec">0</span>
       </div>
+      <div class="wrapper__buttons">
+        <button id="start" class="button__start">Старт</button>
+        <button id="reset" class="button__reset">Сброс</button>
+        <button id="circle" class="button__circle" disabled>Круг</button>
+      </div>
+      <ol id="wrapper__circle" class="wrapper__circle"></ol>
     </div>
   </body>
 </html>

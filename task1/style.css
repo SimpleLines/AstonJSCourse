@@ -2,3 +2,8 @@
   font-size: 40px;
   display: flex;
 }
+
+.wrapper__circle {
+  display: flex;
+  flex-direction: column-reverse;
+}
