@@ -1,6 +1,66 @@
-.wrapper__time {
+ol {
+  padding: 0;
+}
+
+ol li {
   font-size: 40px;
+  color: rgb(98, 98, 98);
+  /* display: flex; */
+  /* justify-content: center; */
+  padding-left: 10px;
+  margin-left: 70px;
+  margin-bottom: 5px;
+  border: 1px solid #aaa;
+  border-radius: 20px;
+}
+
+button {
+  font-size: 30px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+button:hover {
+  opacity: 0.7;
+}
+
+.wrapper {
+  margin: 0 auto;
+  padding: 20px;
+  width: 500px;
+  border: 1px solid #aaa;
+  border-radius: 15px;
+}
+
+.wrapper__time {
+  font-size: 80px;
   display: flex;
+  justify-content: center;
+}
+
+.wrapper__buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.button__start {
+  margin-right: 20px;
+  width: 200px;
+  background-color: rgb(122, 255, 125);
+}
+
+.button__start-active {
+  background-color: rgb(255, 116, 116);
+}
+
+.button__reset {
+  margin-right: 20px;
+  background-color: rgb(255, 145, 0);
+}
+
+.button__circle {
+  background-color: rgb(89, 213, 255);
 }
 
 .wrapper__circle {

@@ -1,7 +1,6 @@
 let partSec = 0;
 let goTime;
 let onCkickStart = 0;
-
 let hour = document.getElementById('hour');
 let min = document.getElementById('min');
 let sec = document.getElementById('sec');
@@ -10,6 +9,11 @@ const startButton = document.getElementById('start');
 const resetButton = document.getElementById('reset');
 const circleButton = document.getElementById('circle');
 const wrapperCircle = document.getElementById('wrapper__circle');
+
+ms.textContent = localStorage.getItem('ms');
+sec.textContent = localStorage.getItem('sec');
+min.textContent = localStorage.getItem('min');
+hour.textContent = localStorage.getItem('hour');
 
 const plusTime = (time) => {
   time.textContent < 9
@@ -32,12 +36,17 @@ const startWatch = () => {
     }
     partSec = 0;
   }
+  localStorage.setItem('ms', ms.textContent);
+  localStorage.setItem('sec', sec.textContent);
+  localStorage.setItem('min', min.textContent);
+  localStorage.setItem('hour', hour.textContent);
 };
 
 startButton.addEventListener('click', () => {
   circleButton.removeAttribute('disabled');
-  if (onCkickStart > 0) startButton.textContent = 'Продолжить';
+  startButton.classList.add('button__start-active');
 
+  if (onCkickStart > 0) startButton.textContent = 'Продолжить';
   if (onCkickStart % 2) {
     clearInterval(goTime);
     onCkickStart += 1;
@@ -46,10 +55,18 @@ startButton.addEventListener('click', () => {
     startButton.textContent = 'Пауза';
     onCkickStart += 1;
   }
+  localStorage.setItem('clickStart', onCkickStart);
 });
 
 resetButton.addEventListener('click', () => {
-  // circleButton.setAttribute('disabled');
+  startButton.classList.remove('button__start-active');
+  localStorage.setItem('clickStart', 0);
+  localStorage.setItem('ms', '0');
+  localStorage.setItem('sec', '00');
+  localStorage.setItem('min', '00');
+  localStorage.setItem('hour', '00');
+
+  circleButton.setAttribute('disabled', true);
   clearInterval(goTime);
   ms.textContent = '0';
   sec.textContent = '00';
@@ -68,3 +85,12 @@ circleButton.addEventListener('click', () => {
   circleInfo.textContent = `${hour.textContent}:${min.textContent}:${sec.textContent}.${ms.textContent}`;
   wrapperCircle.append(circleInfo);
 });
+
+if (localStorage.getItem('clickStart') % 2) {
+  startButton.click();
+} else {
+  if (localStorage.getItem('clickStart') > 0) {
+    startButton.textContent = 'Продолжить';
+    startButton.classList.add('button__start-active');
+  }
+}
