@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.body {
+    background-color: white;
+    font-family: Georgia, serif;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.title {
+    display: flex;
+    justify-content: center;
+}
+.post {
+    padding: 8px;
+    border-color: aqua;
+    border: 1px;
+}
+.posts {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+.pagination-list{
+    display: flex;
+    list-style-type: none;
+}
+.pagination-item{
+    padding: 8px;
+    margin: 8px;
+    cursor: pointer;
+}
+.pagination-item-active{
+    font-weight: 800;
+    color: white;
+    background-color: rgb(21, 17, 242);
+    border-radius: 10px;
+}
+/* .prev-button {
+    
+}
+.next-button {
+ 
+} */
